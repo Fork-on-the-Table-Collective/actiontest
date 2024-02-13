@@ -44,4 +44,4 @@ jobs:
               console.log(label)
               return {"label":label}
       - name: result
-        run: echo ${{ seteps.get_runner_label.lable }}
+        run: echo ${{ seteps.get_runner_label.label }}
