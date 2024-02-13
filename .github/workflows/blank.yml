@@ -27,5 +27,9 @@ jobs:
         with: 
           accessToken: ${{ secrets.GH_Action_PAT }}
           organization: Fork-on-the-Table-Collective
-      - name: test
-        run: echo "${{ steps.load-runner-info-org.outputs.runners }}"
+      - uses: actions/github-script@v7
+        with:
+          script: |
+              const runners=JSON.loads(${{ steps.load-runner-info-org.outputs.runners }})
+              console.log(runners)
+              return runners
