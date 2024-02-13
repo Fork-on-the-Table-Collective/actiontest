@@ -28,8 +28,10 @@ jobs:
           accessToken: ${{ secrets.GH_Action_PAT }}
           organization: Fork-on-the-Table-Collective
       - uses: actions/github-script@v7
+        env:
+          RUNNERS: ${{ steps.load-runner-info-org.outputs.runners }}
         with:
           script: |
-              const runners=JSON.parse(${{ steps.load-runner-info-org.outputs.runners }})
+              const runners=JSON.parse(process.env.RUNNERS)
               console.log(runners)
               return runners
