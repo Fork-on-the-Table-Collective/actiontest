@@ -28,6 +28,7 @@ jobs:
           accessToken: ${{ secrets.GH_Action_PAT }}
           organization: Fork-on-the-Table-Collective
       - uses: actions/github-script@v7
+        id: get_runner_label
         env:
           RUNNERS: ${{ steps.load-runner-info-org.outputs.runners }}
           ACTOR: ${{ github.actor }}
@@ -38,7 +39,9 @@ jobs:
               const runner_params=JSON.parse(process.env.RUNNER_PARAMS)
               const actor=process.env.ACTOR
               const actor_runner = Object.entries(runner_params).filter(([key, value]) => value.actor === actor).map(([key, value]) => key);
-              const label = runners.filter(runner => runner.status=="online" && runner.name==actor_runner).map(runner => runner.labels[3].name)
-              console.log(runners)
+              const labels = runners.filter(runner => runner.status=="online" && runner.name==actor_runner).map(runner => runner.labels[3].name)
+              const label = labels.length>0?labels[0]:""
               console.log(label)
-              return label
+              return {"label":label}
+      - name: result
+        run: echo ${{ seteps.get_runner_label.lable }}
