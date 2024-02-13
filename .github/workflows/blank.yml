@@ -28,4 +28,4 @@ jobs:
           accessToken: ${{ secrets.GH_Action_PAT }}
           organization: Fork-on-the-Table-Collective
       - name: test
-        run: "echo: ${{ steps.load-runner-info-org.outputs.runners-file-location }}"
+        run: echo "${{ steps.load-runner-info-org.outputs.runners }}"
