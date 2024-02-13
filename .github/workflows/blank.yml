@@ -31,11 +31,14 @@ jobs:
         env:
           RUNNERS: ${{ steps.load-runner-info-org.outputs.runners }}
           ACTOR: ${{ github.actor }}
+          RUNNER_PARAMS: ${{ vars.RUNNER_PARAMS }}
         with:
           script: |
               const runners=JSON.parse(process.env.RUNNERS)
+              const runner_params=JSON.pars(proces.env.RUNNER_PARAMS)
               const actor=process.env.ACTOR
-              const label = runners.map(runner =>{if(runner.status=="online" && runner.name==actor){return runner.labels[3].name}})
+              const actor_runner = Object.entries(runner_params).filter(([key, value]) => value.actor === actor).map(([key, value]) => key);
+              const label = runners.filter(runner => runner.status=="online" && runner.name==actor_runner).map(runner => runner.labels[3].name)
               console.log(runners)
               console.log(label)
               return label
