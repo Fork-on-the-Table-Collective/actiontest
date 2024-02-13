@@ -35,7 +35,7 @@ jobs:
         with:
           script: |
               const runners=JSON.parse(process.env.RUNNERS)
-              const runner_params=JSON.pars(proces.env.RUNNER_PARAMS)
+              const runner_params=JSON.pars(process.env.RUNNER_PARAMS)
               const actor=process.env.ACTOR
               const actor_runner = Object.entries(runner_params).filter(([key, value]) => value.actor === actor).map(([key, value]) => key);
               const label = runners.filter(runner => runner.status=="online" && runner.name==actor_runner).map(runner => runner.labels[3].name)
