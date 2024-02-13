@@ -35,7 +35,7 @@ jobs:
           script: |
               const runners=JSON.parse(process.env.RUNNERS)
               const actor=process.env.ACTOR
-              const label = runners.map(runner =>{if(runner.status=="online" && runner.name==actor){return runner.labels[3}.name}
+              const label = runners.map(runner =>{if(runner.status=="online" && runner.name==actor){return runner.labels[3].name}})
               console.log(runners)
               console.log(label)
               return label
